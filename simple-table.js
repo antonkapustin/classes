@@ -18,10 +18,14 @@ export class SimpleTable {
     }
 
     renderHeader() {
+
         let head = this.options.map(el => {
             return `<p class="grid__element">${el.label}</p>`
         })
-        return head.join("");
+
+        return `<div class="grid__header">
+                    ${head.join("")}
+                 </div>`
     }
 
     renderBody() {
@@ -35,8 +39,9 @@ export class SimpleTable {
             return renderToDom(el, template)
         });
 
-        console.log(array)
 
-        return array.join("");
+        return `<div class="grid__body">
+        ${array.join("")}
+     </div>`
     }
 }

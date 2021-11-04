@@ -1,6 +1,9 @@
-.grid{
+.grid__header, .grid__body{
     display: grid;
     grid-template-columns: repeat(3,1fr);
+}
+.grid__header{
+
 }
 .grid__element{
     border:1px solid;
