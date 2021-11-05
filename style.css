@@ -11,3 +11,17 @@
     height: 100%;
     text-align: center;
 }
+.dropdown{
+    display: none;
+}
+.dopdown__radio{}
+.dropdown__list{
+    list-style: none;
+}
+.dropdown__item{}
+.checkbox{
+    display: none;
+}
+.checkbox:checked ~ .dropdown{
+    display: block;
+}

@@ -8,31 +8,15 @@
     <title>Document</title>
 </head>
 <body>
-    <!-- Number
-    String
-    Boolean
-    URl
-
-    FirstName
-    LastName
-    Age
-    Avatar
-    Married
-    BerthDay
-    Phone -->
-    <div id="simple"></div>
-    <div class="grid">
-        <!-- <div class="grid__column grid__column_header">
-            <p class="grid__element grid__title">First Name</p>
-            <p class="grid__element grid__title">Last Name</p>
-            <p class="grid__element grid__title">Age</p>
-            <p class="grid__element grid__title">Avatar</p>
-            <p class="grid__element grid__title">Married</p>
-            <p class="grid__element grid__title">Bearth Day</p>
-            <p class="grid__element grid__title">Phone</p>
-        </div>
-        <div class="grid__column grid__column_body"></div> -->
-
+    <input type="checkbox" id="menu" class="checkbox">
+    <div class="dropdown">
+        <ul class="dropdown__list">
+            <li class="dropdown__item"><label><input class="dopdown__radio" data-dom="radio" type="radio" name="sort" value="null">NULL</label></li>
+            <li class="dropdown__item"><label><input class="dopdown__radio" data-dom="radio" checked type="radio" name="sort" value="asd">ASD</label></li>
+            <li class="dropdown__item"><label><input class="dopdown__radio" data-dom="radio" type="radio" name="sort" value="desk">DESK</label></li>
+        </ul>
     </div>
+    <div id="simple"></div>
+    
     <script type="module" src="./ap.js"></script>
 </html>

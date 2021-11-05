@@ -23,9 +23,9 @@ export class SimpleTable {
             return `<p class="grid__element">${el.label}</p>`
         })
 
-        return `<div class="grid__header">
+        return `<label class="grid__header" for="menu">
                     ${head.join("")}
-                 </div>`
+                 </label>`
     }
 
     renderBody() {
