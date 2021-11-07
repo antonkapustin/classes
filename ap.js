@@ -19,6 +19,8 @@ const options = [
     template: "{{data}} -",
 }]
 
+
+
 const simple = document.querySelector("#simple");
 
 const values = document.querySelector("[data-dom=radio]:checked");

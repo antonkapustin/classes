@@ -6,13 +6,26 @@ export class SortableTable extends SimpleTable {
         const par = document.querySelectorAll("button");
          let btn = par.forEach(el=>{
              el.addEventListener("click", ()=>{
-                 console.log(el.value)
+                 let sort = this.data.sort((a, b) =>{
+                    var nameA = a[el.value].toUpperCase();
+                    var nameB = b[el.value].toUpperCase();
+                    if (nameA < nameB) {
+                      return -1;
+                    }
+                    if (nameA > nameB) {
+                      return 1;
+                    }
+                  
+                    // names must be equal
+                    return 0;
+                  });
+                  this.data = sort;
+
+
              })
          });
 
 
-        console.log(btn)
 
     }
 };
-
