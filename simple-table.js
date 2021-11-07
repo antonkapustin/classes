@@ -5,6 +5,10 @@ export class SimpleTable {
         this.data = data;
         this.hostElement = hostElement,
         this.options = options
+        this.headerTemplate = '<p class="grid__element">{{label}}</p>';
+        this.bodyTemplate = '<p class="grid__element">{{{{key}}}}</p>'
+        this.render()
+        this.applyHandler();
     }
     render(){
         const grid = document.createElement("div");
@@ -15,22 +19,24 @@ export class SimpleTable {
 
         grid.innerHTML = headerStr + bodyStr;
         this.hostElement.append(grid);
+
     }
 
     renderHeader() {
 
-        let head = this.options.map(el => {
-            return `<p class="grid__element">${el.label}</p>`
+        let template = this.options.map(el => {
+            return renderToDom(el, this.headerTemplate);
         })
+        console.log(template)
 
-        return `<label class="grid__header" for="menu">
-                    ${head.join("")}
-                 </label>`
+        return `<div class="grid__header" >
+                    ${template.join("")}
+                 </div>`
     }
 
     renderBody() {
         let template = this.options.map(el => {
-            return `<p class="grid__element">{{${el.key}}}</p>`
+            return renderToDom(el, this.bodyTemplate)
         })
 
         template = template.join("");
@@ -39,9 +45,9 @@ export class SimpleTable {
             return renderToDom(el, template)
         });
 
-
         return `<div class="grid__body">
-        ${array.join("")}
-     </div>`
+                    ${array.join("")}
+                </div>`
     }
+    applyHandler(){};
 }
