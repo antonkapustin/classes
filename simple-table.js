@@ -5,7 +5,7 @@ export class SimpleTable {
         this.data = data;
         this.hostElement = hostElement,
         this.options = options
-        this.headerTemplate = '<p class="grid__element">{{label}}</p>';
+        this.headerTemplate = '<button class="grid__element" value="{{key}}">{{label}}</button>';
         this.bodyTemplate = '<p class="grid__element">{{{{key}}}}</p>'
         this.render()
         this.applyHandler();
@@ -27,9 +27,8 @@ export class SimpleTable {
         let template = this.options.map(el => {
             return renderToDom(el, this.headerTemplate);
         })
-        console.log(template)
 
-        return `<div class="grid__header" >
+        return `<div class="grid__header" data-dom="header">
                     ${template.join("")}
                  </div>`
     }

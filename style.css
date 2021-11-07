@@ -3,18 +3,16 @@
     grid-template-columns: repeat(3,1fr);
 }
 .grid__header{
-    border: 1px solid;
+    border: 2px solid;
     background: beige;
-    color: cornflowerblue;
-    font-size: 22px;
-    font-family: sans-serif;
 }
 .grid__body{}
 .grid__element{
     border: 1px solid;
-    width: 100%;
     height: 50px;
     text-align: center;
     margin: 0;
     padding: 0;
+    background: none;
+}
 }

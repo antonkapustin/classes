@@ -1,21 +1,18 @@
 import { SimpleTable } from "./simple-table.js";
 import { renderToDom } from "./render-to-dom.js";
 
-// export class SortableTable extends SimpleTable {
-//     renderBody() {
-//         let template = this.options.map(el => {
-//             return `<p class="grid__element">{{${el.key}}}</p>`
-//         })
+export class SortableTable extends SimpleTable {
+    applyHandler(){
+        const par = document.querySelectorAll("button");
+         let btn = par.forEach(el=>{
+             el.addEventListener("click", ()=>{
+                 console.log(el.value)
+             })
+         });
 
-//         template = template.join("");
 
-//          let array = this.data.map(el => {
-//             return renderToDom(el, template)
-//         });
+        console.log(btn)
 
-//         return `<div class="grid__body">
-//         ${array.join("")}
-//      </div>`
-//     }
-// };
+    }
+};
 
