@@ -4,6 +4,7 @@ import { options } from "./ap.js";
 export class SortableTable extends SimpleTable {
     applyHandler(){
         let par = document.querySelectorAll(".grid__button");
+        console.log(par)
         let div = document.querySelector(".grid");
         par.forEach((el, i)=>{
              el.addEventListener("click", ()=>{
