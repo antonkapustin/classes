@@ -54,15 +54,31 @@ export class SimpleTable {
         if (this.data.length > 10){
             const page = document.createElement("div");
             page.classList.add("pagination");
-            let numbr = `<button class="pagination__button" type="button">1</button>`
+
+            let numbr = `<button class="pagination__button" type="button" value="1">1</button>`
             for(let i=2; i<=(this.data.length/10);i++){
-                numbr = numbr + `<button class="pagination__button" type="button">${i}</button>`
+                numbr = numbr + `<button class="pagination__button" type="button" value="${i}">${i}</button>`
             };
-
             page.innerHTML = numbr;
-
             this.hostElement.append(page);
 
+            function showItems(data, rows, page){
+                page--
+
+                let start = rows * page;
+                let end = start + rows;
+                let showItem = data.slice(start, end);
+
+            }
+            let paginationButton = document.querySelectorAll(".pagination__button");
+
+            paginationButton.forEach(el =>{
+                el.addEventListener("click", ()=>{
+                    showItems(this.data, 10, el.value)
+
+                })
+            })
+
         }
-    };
+    }
 }
