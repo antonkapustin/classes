@@ -3,7 +3,7 @@ import { options } from "./ap.js";
 
 export class SortableTable extends SimpleTable {
     applyHandler(){
-        let par = document.querySelectorAll("button");
+        let par = document.querySelectorAll(".grid__button");
         let div = document.querySelector(".grid");
         par.forEach((el, i)=>{
              el.addEventListener("click", ()=>{
@@ -32,8 +32,5 @@ export class SortableTable extends SimpleTable {
                 const sorted = new SortableTable(sort, simple, options);
              })
          });
-
-
-
     }
 };
