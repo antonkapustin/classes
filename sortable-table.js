@@ -28,11 +28,9 @@ export class SortableTable extends SimpleTable {
                     this.data = sort;
                     element.value = "ASD";
                 }
-                console.log(element.value);
                 div.remove();
                 const sorted = new SortableTable(sort, simple, options);
              })
-             
          });
 
 

@@ -2,6 +2,9 @@
     display: grid;
     grid-template-columns: repeat(3,1fr);
 }
+.grid{
+    margin-bottom: 20px;
+}
 .grid__header{
     border: 2px solid;
     background: beige;
@@ -15,4 +18,6 @@
     padding: 0;
     background: none;
 }
+.pagination{
+    text-align: center;
 }
