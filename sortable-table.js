@@ -1,28 +1,38 @@
 import { SimpleTable } from "./simple-table.js";
-import { renderToDom } from "./render-to-dom.js";
+import { options } from "./ap.js";
 
 export class SortableTable extends SimpleTable {
     applyHandler(){
-        const par = document.querySelectorAll("button");
-         let btn = par.forEach(el=>{
+        let par = document.querySelectorAll("button");
+        let div = document.querySelector(".grid");
+        par.forEach((el, i)=>{
              el.addEventListener("click", ()=>{
-                 let sort = this.data.sort((a, b) =>{
-                    var nameA = a[el.value].toUpperCase();
-                    var nameB = b[el.value].toUpperCase();
-                    if (nameA < nameB) {
+                 const sort = this.data.sort((a, b) =>{
+                    var valueA = a[el.value];
+                    var valueB = b[el.value];
+                    if (valueA < valueB) {
                       return -1;
                     }
-                    if (nameA > nameB) {
+                    if (valueA > valueB) {
                       return 1;
                     }
-                  
-                    // names must be equal
                     return 0;
                   });
-                  this.data = sort;
 
+                const element = this.options[i];
 
+                if(element.value === "ASD"){
+                    this.data = sort.reverse();
+                    element.value = "DESK";
+                }else{
+                    this.data = sort;
+                    element.value = "ASD";
+                }
+                console.log(element.value);
+                div.remove();
+                const sorted = new SortableTable(sort, simple, options);
              })
+             
          });
 
 

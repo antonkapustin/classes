@@ -2,7 +2,7 @@ import {SimpleTable} from "./simple-table.js";
 import {data} from "./data.js";
 import {SortableTable} from "./sortable-table.js"
 
-const options = [
+export const options = [
 {
     label:"имя",
     key:"name",
