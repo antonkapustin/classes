@@ -2,33 +2,37 @@ import {renderToDom} from "./render-to-dom.js";
 
 export class SimpleTable {
     constructor(data, hostElement, options){
-        this.data = data;
-        this.hostElement = hostElement,
+        this.data = data
+        this.hostElement = hostElement
         this.options = options
-        this.headerTemplate = '<button class="grid__element grid__button" type="button" value="{{key}}">{{label}}</button>';
+        this.headerTemplate = '<button class="grid__element grid__button" type="button" value="{{key}}">{{label}}</button>'
         this.bodyTemplate = '<p class="grid__element">{{{{key}}}}</p>'
         this.render()
         this.applyHandler()
-    }
-    render(){
-        let pogBtns = document.querySelectorAll(".pogination__button");
-        let a = pogBtns.forEach(el =>{
-            el.addEventListener("click", ()=>{
-                return el.value
-            })
-        })
-        console.log(a)
 
-        let data = this.pagination();
+    }
+    render(data=this.data){
+        let pogBtns = document.querySelectorAll(".pogination__button");
+
+
         const grid = document.createElement("div");
         let headerStr = this.renderHeader();
-        let bodyStr = this.renderBody(data);
+        let bodyStr = this.pagination()
 
         grid.classList.add('grid');
         
         grid.innerHTML = headerStr + bodyStr;
 
         this.hostElement.append(grid);
+
+       
+        pogBtns.forEach(el =>{
+            el.addEventListener("click", ()=>{
+
+                bodyStr= this.pagination(this.data, 10, el.value);
+                this.render();
+            })
+        })
 
     }
 
@@ -82,6 +86,7 @@ export class SimpleTable {
             let start = rows * page;
             let end = start + rows;
             let showItem = data.slice(start, end);
-            return showItem
+
+            return this.renderBody(showItem);
     }
 }
