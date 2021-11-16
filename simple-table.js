@@ -5,40 +5,29 @@ export class SimpleTable {
         this.data = data
         this.hostElement = hostElement
         this.options = options
-        this.headerTemplate = '<button class="grid__element grid__button" type="button" value="{{key}}">{{label}}</button>'
+        this.headerTemplate = '<p class="grid__element" >{{label}}</p>'
         this.bodyTemplate = '<p class="grid__element">{{{{key}}}}</p>'
         this.render()
         this.applyHandler()
-
     }
-    render(data=this.data){
-        let pogBtns = document.querySelectorAll(".pogination__button");
-
-
+    render(){
         const grid = document.createElement("div");
+
         let headerStr = this.renderHeader();
-        let bodyStr = this.pagination()
+        let bodyStr = this.renderBody()
 
         grid.classList.add('grid');
         
         grid.innerHTML = headerStr + bodyStr;
 
+        this.hostElement.innerHTML = "";
         this.hostElement.append(grid);
-
-       
-        pogBtns.forEach(el =>{
-            el.addEventListener("click", ()=>{
-
-                bodyStr= this.pagination(this.data, 10, el.value);
-                this.render();
-            })
-        })
 
     }
 
     renderHeader() {
 
-        let template = this.options.map(el => {
+        let template = this.options.columns.map(el => {
             return renderToDom(el, this.headerTemplate);
         })
 
@@ -48,13 +37,13 @@ export class SimpleTable {
     }
 
     renderBody(data=this.data) {
-        let template = this.options.map(el => {
+        let template = this.options.columns.map(el => {
             return renderToDom(el, this.bodyTemplate)
         })
 
         template = template.join("");
 
-         let array = data.map(el => {
+         let array =data.map(el => {
             return renderToDom(el, template)
         });
 
@@ -63,30 +52,5 @@ export class SimpleTable {
                 </div>`
     }
 
-    renderBtn(n=10){
-        let btns = `<button class="pogination__button" value="1">1</button>`
-        for(let i = 2; i<=(this.data.length/n);i++){
-            btns = btns + `<button class="pogination__button" value="${i}">${i}</button>`
-        }
-        return `<div class="pogination">
-                    ${btns}
-                </div>`
-    }
     applyHandler(){};
-
-    pagination(data=this.data, rows=10, page=1){
-        const pogination = document.querySelector(".pogination");
-        let template = this.renderBtn();
-        pogination.innerHTML = template
-
-
-
-            page--
-
-            let start = rows * page;
-            let end = start + rows;
-            let showItem = data.slice(start, end);
-
-            return this.renderBody(showItem);
-    }
 }

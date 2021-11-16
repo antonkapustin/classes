@@ -1,8 +1,10 @@
 import {SimpleTable} from "./simple-table.js";
 import {data} from "./data.js";
-import {SortableTable} from "./sortable-table.js"
+import {SortableTable} from "./sortable-table.js";
+import { PaginationTable } from "./pagination-table.js";
 
-export const options = [
+export const options = {
+    columns:[
 {
     label:"имя",
     key:"name",
@@ -17,30 +19,40 @@ export const options = [
     label:"телефон",
     key:"phone",
     template: "{{data}} -",
-}]
+}],
+sortable:{}
+};
+
 
 
 
 const simple = document.querySelector("#simple");
-
-const values = document.querySelector("[data-dom=radio]:checked");
-
-
-//const simpleTable = new SimpleTable(data, simple, options);
+const simpleTable = new SimpleTable(data, simple, options);
 
 
+const sort = document.querySelector("#sort");
+const sortTable = new SortableTable(data, sort, options);
 
-const sort = new SortableTable(data, simple, options);
+const preSort = document.querySelector("#pre-sort");
 
-//sort.render();
+const preSortTable = new SortableTable(data, preSort, {
+    ...options,
+    ...{
+        sortable:{
+            key:"name",
+            value:"ASC"
+        }
+    }
+});
+
+const pagination = document.querySelector("#pagination");
+const paginationTable = new PaginationTable(data, pagination, options);
 
 
-// const sortableDefault = ... new SortableTable()
-// const sortablePredef = ... new SortableTable()
-// const options = {
-    // sortable: {
-    //     key: 'name',
-    //     value: 'ASC'
-    // },
-    // columnst: []
-// }
+
+// спред оператор 
+// remove handler befor render
+//this.hostElement
+//dragonDrop движение мыши вниз вешать ивент, вверх убирать ивент
+// js event loop telegramm
+// read object assign();
