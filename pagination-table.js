@@ -4,7 +4,8 @@ export class PaginationTable extends SimpleTable{
     constructor(data, hostElement, options){
         super(data,hostElement, options)
         this.currentPage = 1
-        this.pagination([...this.data], 10,this.currentPage)
+        this.rows = 10
+        this.pagination([...this.data], this.rows,this.currentPage)
     }
     applyHandler(){
         this.hostElement.addEventListener("click", this.onPagination.bind(this));
@@ -26,7 +27,7 @@ export class PaginationTable extends SimpleTable{
           let key = current.value;
 
 
-          this.pagination([...this.data],10, key);
+          this.pagination([...this.data],this.rows, key);
           this.hostElement.removeEventListener("click", this.onPagination);
     }
 
@@ -46,12 +47,16 @@ export class PaginationTable extends SimpleTable{
 
     pagination(data, rows, page){
         if(page === "prev"){
+            if(this.currentPage === 1){
+                let pushedBtn = this.hostElement.querySelector(`[value="${page}"]`);
+                pushedBtn.disabled = true;
+            }else{
             this.currentPage--;
-            this.pagination([...this.data], 10,this.currentPage);
+            this.pagination([...this.data], rows,this.currentPage);
+            }
         }else if(page === "next"){
             this.currentPage++
-            console.log(this.currentPage)
-            this.pagination([...this.data], 10,this.currentPage);
+            this.pagination([...this.data], rows,this.currentPage);
         }else {
             this.currentPage = page;
         page--
