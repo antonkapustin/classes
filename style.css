@@ -1,13 +1,15 @@
+body{
+    text-align: center;
+}
+
 .grid__header, .grid__body{
     display: grid;
     grid-template-columns: repeat(3,1fr);
 }
 .grid{
-    margin-bottom: 20px;
-}
+    margin-bottom: 20px;}
 .grid__header{
-    border: 2px solid;
-    background: beige;
+    background: rgb(11, 230, 200);
 }
 .grid__body{}
 .grid__element{
@@ -20,4 +22,19 @@
 }
 .pagination{
     text-align: center;
+}
+.paginationBtn{}
+.pagination__button{
+    width: 50px;
+    height: 35px;
+    background-color: darkgrey;
+    color: white;
+    border: none;
+    margin: 2px;
+}
+.pagination__button:hover{
+    background: grey;
+}
+.pagination__button_active{
+    background-color:grey;
 }

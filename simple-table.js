@@ -5,9 +5,9 @@ export class SimpleTable {
         this.data = data
         this.hostElement = hostElement
         this.options = options
-        this.headerTemplate = '<p class="grid__element" >{{label}}</p>'
-        this.bodyTemplate = '<p class="grid__element">{{{{key}}}}</p>'
-        this.render()
+        this.headerTemplate = '<p class="grid__element" scope="col" >{{label}}</p>'
+        this.bodyTemplate = '<p class="grid__element" scope="row">{{{{key}}}}</p>'
+        this.render() 
         this.applyHandler()
     }
     render(){

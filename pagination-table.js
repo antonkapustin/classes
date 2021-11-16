@@ -3,12 +3,13 @@ import { SimpleTable } from "./simple-table.js";
 export class PaginationTable extends SimpleTable{
     constructor(data, hostElement, options){
         super(data,hostElement, options)
-        this.initialeData = [...this.data]
-        this.pagination()
+        this.currentPage = 1
+        this.pagination([...this.data], 10,this.currentPage)
     }
     applyHandler(){
-        this.hostElement.addEventListener("click", this.onPagination.bind(this))
+        this.hostElement.addEventListener("click", this.onPagination.bind(this));
     }
+
     onPagination(event){
         let current = event.target;
 
@@ -24,23 +25,35 @@ export class PaginationTable extends SimpleTable{
 
           let key = current.value;
 
-          this.pagination([...this.initialeData],10, key);
+
+          this.pagination([...this.data],10, key);
+          this.hostElement.removeEventListener("click", this.onPagination);
     }
 
+    renderBtn(n){
+        let btns = `<button class="pagination__button" value="1">1</button>`;
 
+        let pages = Math.ceil(this.data.length/n);
 
-
-
-    renderBtn(n=10){
-        let btns = `<button class="pagination__button" value="1">1</button>`
-        for(let i = 2; i<=(this.data.length/n);i++){
-            btns = btns + `<button class="pagination__button" value="${i}">${i}</button>`
+        for(let i = 2; i<=pages;i++){
+            btns = btns + `<button class="pagination__button" type="button" value="${i}">${i}</button>`
         }
-        return `<div class="pagination">
+
+        return `<button class="pagination__button" type="button" value="prev">Prev</button>
                     ${btns}
-                </div>`
+                <button class="pagination__button" type="button" value="next">Next</button>`
     }
-    pagination(data=this.data, rows=10, page=1){
+
+    pagination(data, rows, page){
+        if(page === "prev"){
+            this.currentPage--;
+            this.pagination([...this.data], 10,this.currentPage);
+        }else if(page === "next"){
+            this.currentPage++
+            console.log(this.currentPage)
+            this.pagination([...this.data], 10,this.currentPage);
+        }else {
+            this.currentPage = page;
         page--
 
         let start = rows * page;
@@ -51,8 +64,7 @@ export class PaginationTable extends SimpleTable{
 
         let headerStr = this.renderHeader();
         let bodyStr = this.renderBody(showItem)
-        console.log(bodyStr)
-    
+
         grid.classList.add('grid');
         
         grid.innerHTML = headerStr + bodyStr;
@@ -61,12 +73,16 @@ export class PaginationTable extends SimpleTable{
         this.hostElement.append(grid);
 
         const paginationDiv = document.createElement("div");
-        let paginationBtn = this.renderBtn();
+        let paginationBtn = this.renderBtn(rows);
 
-        paginationDiv.classList.add("pagination");
+
+        paginationDiv.classList.add("paginationBtn");
         paginationDiv.innerHTML = paginationBtn;
         this.hostElement.append(paginationDiv);
 
+        let pushedBtn = this.hostElement.querySelector(`[value="${this.currentPage}"]`);
 
+        pushedBtn.classList.add("pagination__button_active");
+        }
     }
 }
