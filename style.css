@@ -1,5 +1,6 @@
 body{
     text-align: center;
+    font-family: 'Mulish', sans-serif;
 }
 
 .grid__header, .grid__body{
@@ -9,9 +10,13 @@ body{
 .grid{
     margin-bottom: 20px;}
 .grid__header{
-    background: rgb(11, 230, 200);
+    background: grey;
+    color: white;
+    font-size: 22px;
 }
-.grid__body{}
+.grid__body{
+    background: lightcyan;
+}
 .grid__element{
     border: 1px solid;
     height: 50px;
@@ -19,6 +24,14 @@ body{
     margin: 0;
     padding: 0;
     background: none;
+}
+.grid__element_button{
+    color: inherit;
+    font-size: inherit;
+    font-family: inherit;
+}
+.grid__element_button:hover{
+    background: darkgrey;
 }
 .pagination{
     text-align: center;

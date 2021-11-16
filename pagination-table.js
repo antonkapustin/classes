@@ -5,8 +5,12 @@ export class PaginationTable extends SimpleTable{
         super(data,hostElement, options)
         this.currentPage = 1
         this.rows = 10
+    }
+
+    render(){
         this.pagination([...this.data], this.rows,this.currentPage)
     }
+
     applyHandler(){
         this.hostElement.addEventListener("click", this.onPagination.bind(this));
     }

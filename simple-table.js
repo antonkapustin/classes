@@ -7,8 +7,10 @@ export class SimpleTable {
         this.options = options
         this.headerTemplate = '<p class="grid__element" scope="col" >{{label}}</p>'
         this.bodyTemplate = '<p class="grid__element" scope="row">{{{{key}}}}</p>'
-        this.render() 
-        this.applyHandler()
+
+        setTimeout(()=>{
+            this.render() 
+            this.applyHandler()},)
     }
     render(){
         const grid = document.createElement("div");
@@ -31,7 +33,7 @@ export class SimpleTable {
             return renderToDom(el, this.headerTemplate);
         })
 
-        return `<div class="grid__header" data-dom="header">
+        return `<div class="grid__header">
                     ${template.join("")}
                  </div>`
     }
