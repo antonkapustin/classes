@@ -7,7 +7,7 @@ export class SortableTable extends SimpleTable {
         this.sort();
     }
     render(){
-        this.headerTemplate = '<button class="grid__element grid__button" type="button" value="{{key}}">{{label}}</button>';
+        this.headerTemplate = '<button class="grid__element grid__element_button" type="button" value="{{key}}">{{label}}</button>';
         super.render()
     }
     applyHandler(){
