@@ -2,8 +2,9 @@ import {SimpleTable} from "./simple-table.js";
 import {data} from "./data.js";
 import {SortableTable} from "./sortable-table.js";
 import { PaginationTable } from "./pagination-table.js";
+import { EventEmiter } from "./eventEmiter.js";
 
-export const options = {
+const options = {
     columns:[
 {
     label:"имя",
@@ -22,6 +23,7 @@ export const options = {
 }],
 sortable:{}
 };
+
 
 
 
