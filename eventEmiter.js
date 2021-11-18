@@ -16,5 +16,14 @@ export class EventEmiter{
         let index = this.event[eventName].indexOf(callback);
         return this.event[eventName].splice(index,1);
     }
-    emit(eventName, arg){}
+    emit(eventName, arg){
+        const event = this.event[eventName];
+        if (typeof this.event[eventName] === "undefined") {
+            return
+            }else{
+                event.forEach(element => {
+                    element.call(null, arg);
+                })
+            }
+    }
 }
