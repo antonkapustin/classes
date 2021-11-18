@@ -10,7 +10,8 @@ export class SimpleTable {
 
         setTimeout(()=>{
             this.render() 
-            this.applyHandler()},)
+            this.applyHandler()},
+        )
     }
     render(){
         const grid = document.createElement("div");

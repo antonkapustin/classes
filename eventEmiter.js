@@ -4,9 +4,7 @@ export class EventEmiter{
     }
     subscribe(eventName, callback){
         if (typeof this.event[eventName] === "undefined") {
-            this.event = {
-                eventName: []
-            }
+            this.event[eventName] = []
             this.events[eventName].push(callback);
             }else{
                 this.events[eventName].push(callback);
