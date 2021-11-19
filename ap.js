@@ -24,6 +24,7 @@ const options = {
 sortable:{}
 };
 
+
 const simple = document.querySelector("#simple");
 const simpleTable = new SimpleTable(data, simple, options);
 
