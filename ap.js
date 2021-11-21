@@ -3,6 +3,7 @@ import {data} from "./data.js";
 import {SortableTable} from "./sortable-table.js";
 import { PaginationTable } from "./pagination-table.js";
 import { EventEmiter } from "./eventEmiter.js";
+import { Filter } from "./filter.js";
 
 const options = {
     columns:[
@@ -24,6 +25,7 @@ const options = {
 sortable:{}
 };
 
+const tableDataEmiter = new EventEmiter();
 
 const simple = document.querySelector("#simple");
 const simpleTable = new SimpleTable(data, simple, options);
@@ -46,6 +48,12 @@ const preSortTable = new SortableTable(data, preSort, {
 
 const pagination = document.querySelector("#pagination");
 const paginationTable = new PaginationTable(data, pagination, options);
+
+const filter = document.querySelector("#simple-filter");
+const filterClass = new Filter(filter);
+
+const pagination2 = document.querySelector("#pagination_filter");
+const paginationFilter = new PaginationTable(data, pagination2, options)
 
 
 

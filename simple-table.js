@@ -1,5 +1,7 @@
 import {renderToDom} from "./render-to-dom.js";
 
+import { EventEmiter } from "./eventEmiter.js";
+
 export class SimpleTable {
     constructor(data, hostElement, options){
         this.data = data
@@ -12,6 +14,7 @@ export class SimpleTable {
             this.render() 
             this.applyHandler()},
         )
+        this.emiter = new EventEmiter();
     }
     render(){
         const grid = document.createElement("div");
