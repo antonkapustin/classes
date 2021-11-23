@@ -20,6 +20,4 @@ export class Filter {
         let input = this.hostElement.querySelector(".filter__input");
         return input.value
     }
-
-
 }
