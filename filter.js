@@ -1,7 +1,8 @@
-
+import { EventEmiter } from "./eventEmiter.js";
 export class Filter {
     constructor(hostElement){
         this.hostElement = hostElement
+        this.emitter = new EventEmiter();
 
         this.render()
         this.applyHandlers()
@@ -18,6 +19,7 @@ export class Filter {
     }
     onFilter(){
         let input = this.hostElement.querySelector(".filter__input");
+        this.emitter.emit("filter", input.value);
         return input.value
     }
 }

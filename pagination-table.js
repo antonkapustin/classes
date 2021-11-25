@@ -94,15 +94,4 @@ export class PaginationTable extends SimpleTable{
         pushedBtn.classList.add("pagination__button_active");
         }
     }
-    filter(element){
-        let value 
-        let foundValue = this.data.map((el)=>{
-            if(el.name === element.name){
-            value = [el]
-            } else {
-                return null
-            }
-        })
-        return value
-    }
 }

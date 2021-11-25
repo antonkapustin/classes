@@ -49,11 +49,12 @@ const preSortTable = new SortableTable(data, preSort, {
 const pagination = document.querySelector("#pagination");
 const paginationTable = new PaginationTable(data, pagination, options);
 
-// const filter = document.querySelector("#simple-filter");
-// const filterClass = new Filter(filter);
+const filter = document.querySelector("#simple-filter");
+const filterClass = new Filter(filter);
 
 const pagination2 = document.querySelector("#pagination_filter");
 const paginationFilter = new PaginationTable(data, pagination2, options)
 
-console.log(paginationFilter.filter({name:"Nita "}));
-
+filterClass.emitter.subscribe("filter", (filter) => {
+    paginationFilter.filter.call(paginationFilter, {name:`${filter} `});
+  });

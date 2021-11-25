@@ -14,7 +14,7 @@ export class SimpleTable {
             this.render() 
             this.applyHandler()},
         )
-        this.emiter = new EventEmiter();
+        this.emitter = new EventEmiter();
     }
     render(){
         const grid = document.createElement("div");
@@ -59,4 +59,18 @@ export class SimpleTable {
     }
 
     applyHandler(){};
+
+    filter(element){
+        console.log(element)
+        let value 
+        let foundValue = this.data.map((el)=>{
+            if(el.name.toUpperCase() === element.name.toUpperCase()){
+                value = [el]
+            } else {
+                return 
+            }
+        })
+        this.data = value;
+        this.render()
+    }
 }
