@@ -4,6 +4,7 @@ import {SortableTable} from "./sortable-table.js";
 import { PaginationTable } from "./pagination-table.js";
 import { EventEmiter } from "./eventEmiter.js";
 import { Filter } from "./filter.js";
+import { ShowOptions } from "./showOptions.js";
 
 const options = {
     columns:[
@@ -11,17 +12,41 @@ const options = {
     label:"имя",
     key:"name",
     template: "{{data.name}}",
+    showed: "checked"
 },
 {
     label:"фамилия",
     key:"surename",
     template: "{{data}}",
+    showed:"checked"
 },
 {
     label:"телефон",
     key:"phone",
     template: "{{data}} -",
-}],
+    showed:"checked"
+},
+{
+    label:"возраст",
+    key:"age",
+    template: "{{data}}",
+},
+{
+    label:"замужество",
+    key:"isActive",
+    template: "{{data}}",
+},
+{
+    label:"Дата Рождения",
+    key:"registered",
+    template: "{{data}}",
+},
+{
+    label:"ID",
+    key:"_id",
+    template: "{{data}}",
+}
+],
 sortable:{}
 };
 
@@ -57,4 +82,9 @@ const paginationFilter = new PaginationTable(data, pagination2, options)
 
 filterClass.emitter.subscribe("filter", (filter) => {
     paginationFilter.filter.call(paginationFilter, {name:`${filter}`});
-  });
+});
+
+const moreOptions = document.querySelector("#show-options");
+const moreOptionsClass = new ShowOptions(moreOptions, options);
+
+

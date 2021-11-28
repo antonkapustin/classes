@@ -1,11 +1,12 @@
 body{
     text-align: center;
     font-family: 'Mulish', sans-serif;
+    padding: 15px;
 }
 
 .grid__header, .grid__body{
     display: grid;
-    grid-template-columns: repeat(3,1fr);
+    grid-template-columns: repeat(7,1fr);
 }
 .grid{
     margin-bottom: 20px;}
@@ -16,6 +17,7 @@ body{
 }
 .grid__body{
     background: lightcyan;
+    word-break: break-word;
 }
 .grid__element{
     border: 1px solid;

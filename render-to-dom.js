@@ -16,8 +16,11 @@ export  const renderToDom = (data, template) => {
         let value = keys[i].reduce((sum, curr)=>{
           return sum[curr];
         },data);
-
+        if(value === undefined){
+          result = result.replace(element, "");
+        } else{
         result = result.replace(element, value);
+        }
       });
 
       return result;
