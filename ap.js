@@ -56,5 +56,5 @@ const pagination2 = document.querySelector("#pagination_filter");
 const paginationFilter = new PaginationTable(data, pagination2, options)
 
 filterClass.emitter.subscribe("filter", (filter) => {
-    paginationFilter.filter.call(paginationFilter, {name:`${filter} `});
+    paginationFilter.filter.call(paginationFilter, {name:`${filter}`});
   });

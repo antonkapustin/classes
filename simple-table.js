@@ -9,6 +9,7 @@ export class SimpleTable {
         this.options = options
         this.headerTemplate = '<p class="grid__element" scope="col" >{{label}}</p>'
         this.bodyTemplate = '<p class="grid__element" scope="row">{{{{key}}}}</p>'
+        this.initialeData = [...data]
 
         setTimeout(()=>{
             this.render() 
@@ -16,11 +17,11 @@ export class SimpleTable {
         )
         this.emitter = new EventEmiter();
     }
-    render(){
+    render(data){
         const grid = document.createElement("div");
 
         let headerStr = this.renderHeader();
-        let bodyStr = this.renderBody()
+        let bodyStr = this.renderBody(data)
 
         grid.classList.add('grid');
         
@@ -61,16 +62,9 @@ export class SimpleTable {
     applyHandler(){};
 
     filter(element){
-        console.log(element)
-        let value 
-        let foundValue = this.data.map((el)=>{
-            if(el.name.toUpperCase() === element.name.toUpperCase()){
-                value = [el]
-            } else {
-                return 
-            }
-        })
-        this.data = value;
-        this.render()
+        this.data = this.initialeData.filter((el)=>{ 
+           return el.name.toUpperCase().trim().indexOf(element.name.toUpperCase()) === 0;
+        });
+        this.render();
     }
 }
