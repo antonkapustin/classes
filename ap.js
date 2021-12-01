@@ -86,5 +86,8 @@ filterClass.emitter.subscribe("filter", (filter) => {
 
 const moreOptions = document.querySelector("#show-options");
 const moreOptionsClass = new ShowOptions(moreOptions, options);
+moreOptionsClass.emitter.subscribe("ShowOptions", (element)=>{
+    simpleTable.showed.call(simpleTable, element)
+});
 
 

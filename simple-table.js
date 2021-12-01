@@ -38,7 +38,7 @@ export class SimpleTable {
             return renderToDom(el, this.headerTemplate);
         })
 
-        return `<div class="grid__header">
+        return `<div class="grid__header" data-dom="grid">
                     ${template.join("")}
                  </div>`
     }
@@ -50,11 +50,11 @@ export class SimpleTable {
 
         template = template.join("");
 
-         let array =data.map(el => {
+         let array = data.map(el => {
             return renderToDom(el, template)
         });
 
-        return `<div class="grid__body">
+        return `<div class="grid__body" data-dom="grid">
                     ${array.join("")}
                 </div>`
     }
@@ -66,5 +66,12 @@ export class SimpleTable {
            return el.name.toUpperCase().trim().indexOf(element.name.toUpperCase()) === 0;
         });
         this.render();
+    }
+    showed(element){
+        this.options.columns = element.filter((el)=>{
+           return el.showed === "checked";
+        })
+        
+        this.render()
     }
 }

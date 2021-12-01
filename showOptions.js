@@ -50,34 +50,23 @@ export class ShowOptions{
           if (current === this.hostElement) {
             return;
           }
-          if(current.checked === true){
-              this.add(current.value)
-          } else{
-            this.remove(current.value)
-          }
-          console.log(this.options.columns);
-          this.render()
+          this.addOrRemove(current.value);
     }
 
-    add(value){
+    addOrRemove(value){
         this.options.columns = this.optionsShowed.map((el)=>{
             if(el.key === value){
-                 el.showed = "checked"
-                return el
+                if(el.showed === "checked"){
+                    el.showed = "";
+                    return el
+                }else {
+                    el.showed = "checked";
+                    return el
+                }
             } else {
                 return el
             }
         })
-    }
-
-    remove(value){
-        this.options.columns = this.optionsShowed.map((el)=>{
-            if(el.key === value){
-                 el.showed = ""
-                return el
-            } else {
-                return el
-            }
-        })
+        this.emitter.emit("ShowOptions", this.options.columns);
     }
 }
