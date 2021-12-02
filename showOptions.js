@@ -18,7 +18,7 @@ export class ShowOptions{
     }
     render(){
         const list = document.createElement("ul");
-        const inputs = this.renderInp();
+        const inputs = this.renderInp()
 
         list.classList.add('options__list');
         
@@ -58,15 +58,16 @@ export class ShowOptions{
             if(el.key === value){
                 if(el.showed === "checked"){
                     el.showed = "";
-                    return el
-                }else {
-                    el.showed = "checked";
-                    return el
+                } else {
+                    el.showed = "checked"
                 }
+                return el
             } else {
                 return el
             }
         })
+
+
         this.emitter.emit("ShowOptions", this.options.columns);
     }
 }

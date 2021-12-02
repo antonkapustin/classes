@@ -6,7 +6,7 @@ body{
 
 .grid__header, .grid__body{
     display: grid;
-    grid-template-columns: repeat(5,1fr);
+    grid-template-columns: repeat(3,1fr);
 }
 .grid{
     margin-bottom: 20px;}

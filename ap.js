@@ -47,7 +47,7 @@ const options = {
     template: "{{data}}",
 }
 ],
-sortable:{}
+sortable:{},
 };
 
 const tableDataEmiter = new EventEmiter();
@@ -86,8 +86,6 @@ filterClass.emitter.subscribe("filter", (filter) => {
 
 const moreOptions = document.querySelector("#show-options");
 const moreOptionsClass = new ShowOptions(moreOptions, options);
-moreOptionsClass.emitter.subscribe("ShowOptions", (element)=>{
-    simpleTable.showed.call(simpleTable, element)
-});
+moreOptionsClass.emitter.subscribe("ShowOptions", simpleTable.applyData.bind(simpleTable));
 
 

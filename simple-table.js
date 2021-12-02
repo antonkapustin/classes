@@ -17,6 +17,13 @@ export class SimpleTable {
         )
         this.emitter = new EventEmiter();
     }
+    applyData(){
+        this.options.columns = this.options.columns.filter((el)=>{
+            return el.showed === "checked";
+        })
+        console.log(this.options.columns)
+        this.render();
+    }
     render(data){
         const grid = document.createElement("div");
 
@@ -29,6 +36,8 @@ export class SimpleTable {
 
         this.hostElement.innerHTML = "";
         this.hostElement.append(grid);
+
+        
 
     }
 
@@ -66,12 +75,5 @@ export class SimpleTable {
            return el.name.toUpperCase().trim().indexOf(element.name.toUpperCase()) === 0;
         });
         this.render();
-    }
-    showed(element){
-        this.options.columns = element.filter((el)=>{
-           return el.showed === "checked";
-        })
-        
-        this.render()
     }
 }
