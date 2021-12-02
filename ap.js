@@ -12,39 +12,43 @@ const options = {
     label:"имя",
     key:"name",
     template: "{{data.name}}",
-    showed: "checked"
+    checked: "checked"
 },
 {
     label:"фамилия",
     key:"surename",
     template: "{{data}}",
-    showed:"checked"
+    checked: "checked"
 },
 {
     label:"телефон",
     key:"phone",
     template: "{{data}} -",
-    showed:"checked"
+    checked: "checked"
 },
 {
     label:"возраст",
     key:"age",
     template: "{{data}}",
+    checked: "checked"
 },
 {
     label:"замужество",
     key:"isActive",
     template: "{{data}}",
+    checked: "checked"
 },
 {
     label:"Дата Рождения",
     key:"registered",
     template: "{{data}}",
+    checked: "checked"
 },
 {
     label:"ID",
     key:"_id",
     template: "{{data}}",
+    checked: "checked"
 }
 ],
 sortable:{},

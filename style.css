@@ -53,3 +53,13 @@ body{
 .pagination__button_active{
     background-color:grey;
 }
+.options__button~.options__list{
+    display:none;
+}
+.options__button_pushed~.options__list{
+    display:block;
+}
+.options__list{
+    list-style: none;
+    text-align: left;
+}

@@ -6,9 +6,9 @@ export class ShowOptions{
         this.hostElement = hostElement
         this.options = options
         this.optionsShowed = [...options.columns]
-        this.inpTemplate =`<li>
+        this.inpTemplate =`<li class="option__item">
         <label class="options__label">
-        <input class="options__input" type="checkbox" value="{{key}}" {{showed}}>
+        <input class="options__input" type="checkbox" value="{{key}}" {{checked}}>
         <span class="options__text">{{key}}</span>
         </label>
         </li>`
@@ -17,15 +17,25 @@ export class ShowOptions{
         this.applyHandler()
     }
     render(){
-        const list = document.createElement("ul");
-        const inputs = this.renderInp()
+        const button = document.createElement("button");
+        button.classList.add('options__button');
+        button.innerHTML = "Push me!";
 
+        const list = document.createElement("ul");
+        const inputs = this.renderInp();
         list.classList.add('options__list');
-        
         list.innerHTML = inputs;
 
         this.hostElement.innerHTML = "";
+        this.hostElement.append(button);
         this.hostElement.append(list);
+
+    }
+
+    applyHandler(){
+        const button = this.hostElement.querySelector(".options__button");
+        this.hostElement.addEventListener("click",this.onAdd.bind(this));
+        button.addEventListener("click", ()=>{button.classList.toggle("options__button_pushed")});
     }
 
     renderInp(){
@@ -33,10 +43,6 @@ export class ShowOptions{
             return renderToDom(el, this.inpTemplate);
         })
         return template.join("");
-    }
-
-    applyHandler(){
-        this.hostElement.addEventListener("click",this.onAdd.bind(this));
     }
 
     onAdd(event){
@@ -56,10 +62,10 @@ export class ShowOptions{
     addOrRemove(value){
         this.options.columns = this.optionsShowed.map((el)=>{
             if(el.key === value){
-                if(el.showed === "checked"){
-                    el.showed = "";
+                if(el.checked === "checked"){
+                    el.checked = "";
                 } else {
-                    el.showed = "checked"
+                    el.checked = "checked"
                 }
                 return el
             } else {

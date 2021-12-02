@@ -19,9 +19,8 @@ export class SimpleTable {
     }
     applyData(){
         this.options.columns = this.options.columns.filter((el)=>{
-            return el.showed === "checked";
+            return el.checked === "checked";
         })
-        console.log(this.options.columns)
         this.render();
     }
     render(data){
