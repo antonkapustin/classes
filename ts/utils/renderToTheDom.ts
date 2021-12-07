@@ -1,6 +1,4 @@
-import { IData } from "../components/simpleTable component/simpleTableInterfaces";
-
-export const renderToDom = (data: IData[], template: string): string => {
+export const renderToDom = (data: Object, template: string): string => {
   let matchMarkers = template.match(/{{\w.+?}}/gi);
 
   let matchKeys = template.match(/(?<={{)\w.+?(?=}})/gi);
@@ -15,14 +13,13 @@ export const renderToDom = (data: IData[], template: string): string => {
 
   matchMarkers.forEach((element, i) => {
     let value = keys[i].reduce((sum, curr) => {
-      let x = sum[curr];
-      return x;
+      return sum[curr];
     }, data);
 
     if (value === undefined) {
       result = result.replace(element, "");
     } else {
-      result = result.replace(element, value);
+      result = result.replace(element, value as string);
     }
   });
   return result;
