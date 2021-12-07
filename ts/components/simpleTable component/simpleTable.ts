@@ -1,8 +1,16 @@
-import { renderToDom } from "./render-to-dom.js";
-import { EventEmiter } from "./eventEmiter.js";
+import { IData } from "./simpleTableInterfaces";
+import { IFilter } from "./simpleTableInterfaces";
+import { IOptions } from "./simpleTableInterfaces";
 
 export class SimpleTable {
-  constructor(data, hostElement, options) {
+  data: IData[];
+  hostElement: Element;
+  options: IOptions;
+  headerTemplate: string;
+  bodyTemplate: string;
+  initialeData: IData[];
+
+  constructor(data: IData[], hostElement: Element, options: IOptions) {
     this.data = data;
     this.hostElement = hostElement;
     this.options = options;
@@ -14,13 +22,12 @@ export class SimpleTable {
       this.render();
       this.applyHandler();
     });
-    this.emitter = new EventEmiter();
   }
-  render(data) {
+  render(): void {
     const grid = document.createElement("div");
 
     let headerStr = this.renderHeader();
-    let bodyStr = this.renderBody(data);
+    let bodyStr = this.renderBody(this.data);
 
     grid.classList.add("grid");
 
@@ -29,8 +36,7 @@ export class SimpleTable {
     this.hostElement.innerHTML = "";
     this.hostElement.append(grid);
   }
-
-  renderHeader() {
+  renderHeader(): string {
     let template = this.options.columns.map((el) => {
       return renderToDom(el, this.headerTemplate);
     });
@@ -39,15 +45,14 @@ export class SimpleTable {
                     ${template.join("")}
                  </div>`;
   }
+  renderBody(data: IData[]): string {
+    let template = this.options.columns
+      .map((el) => {
+        return renderToDom(el, this.bodyTemplate);
+      })
+      .join("");
 
-  renderBody(data = this.data) {
-    let template = this.options.columns.map((el) => {
-      return renderToDom(el, this.bodyTemplate);
-    });
-
-    template = template.join("");
-
-    let array = data.map((el) => {
+    let array = this.data.map((el) => {
       return renderToDom(el, template);
     });
 
@@ -55,13 +60,14 @@ export class SimpleTable {
                     ${array.join("")}
                 </div>`;
   }
-
-  applyHandler() {}
-
-  filter(element) {
+  applyHandler(): void {}
+  filter(element: IFilter) {
     this.data = this.initialeData.filter((el) => {
       return (
-        el.name.toUpperCase().trim().indexOf(element.name.toUpperCase()) === 0
+        (el.name as string)
+          .toUpperCase()
+          .trim()
+          .indexOf(element.name.toUpperCase()) === 0
       );
     });
     this.render();

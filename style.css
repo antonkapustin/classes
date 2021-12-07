@@ -1,65 +1,68 @@
-body{
-    text-align: center;
-    font-family: 'Mulish', sans-serif;
-    padding: 15px;
+body {
+  text-align: center;
+  font-family: "Mulish", sans-serif;
+  padding: 15px;
 }
 
-.grid__header, .grid__body{
-    display: grid;
-    grid-template-columns: repeat(3,1fr);
+.grid__header,
+.grid__body {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
 }
-.grid{
-    margin-bottom: 20px;}
-.grid__header{
-    background: grey;
-    color: white;
-    font-size: 22px;
+.grid {
+  margin-bottom: 20px;
 }
-.grid__body{
-    background: lightcyan;
-    word-break: break-word;
+.grid__header {
+  background: grey;
+  color: white;
+  font-size: 22px;
 }
-.grid__element{
-    border: 1px solid;
-    height: 50px;
-    text-align: center;
-    margin: 0;
-    padding: 0;
-    background: none;
+.grid__body {
+  background: lightcyan;
+  word-break: break-word;
 }
-.grid__element_button{
-    color: inherit;
-    font-size: inherit;
-    font-family: inherit;
+.grid__element {
+  border: 1px solid;
+  height: 50px;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  background: none;
 }
-.grid__element_button:hover{
-    background: darkgrey;
+.grid__element_button {
+  color: inherit;
+  font-size: inherit;
+  font-family: inherit;
 }
-.pagination{
-    text-align: center;
+.grid__element_button:hover {
+  background: darkgrey;
 }
-.paginationBtn{}
-.pagination__button{
-    width: 50px;
-    height: 35px;
-    background-color: darkgrey;
-    color: white;
-    border: none;
-    margin: 2px;
+.pagination {
+  text-align: center;
 }
-.pagination__button:hover{
-    background: grey;
+.paginationBtn {
 }
-.pagination__button_active{
-    background-color:grey;
+.pagination__button {
+  width: 50px;
+  height: 35px;
+  background-color: darkgrey;
+  color: white;
+  border: none;
+  margin: 2px;
 }
-.options__button~.options__list{
-    display:none;
+.pagination__button:hover {
+  background: grey;
 }
-.options__button_pushed~.options__list{
-    display:block;
+.pagination__button_active {
+  background-color: grey;
 }
-.options__list{
-    list-style: none;
-    text-align: left;
+.options__button ~ .options__list {
+  display: none;
+}
+.options__button_pushed ~ .options__list {
+  display: block;
+}
+.options__list {
+  list-style: none;
+  text-align: left;
 }

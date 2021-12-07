@@ -1,12 +1,12 @@
-import { SimpleTable } from "./simple-table.js";
-import { data } from "./data.js";
-import { SortableTable } from "./sortable-table.js";
-import { PaginationTable } from "./pagination-table.js";
-import { EventEmiter } from "./eventEmiter.js";
-import { Filter } from "./filter.js";
-import { ShowOptions } from "./showOptions.js";
+import { data } from "../data";
+import { SimpleTable } from "./components/simpleTable component/simpleTable";
+import { SortableTable } from "./components/sortableTable component/sortableTable";
+import { PaginationTable } from "./components/paginationTable component/PaginationTable components";
+import { IOptions } from "./components/simpleTable component/simpleTableInterfaces";
+import { SortableOptions } from "./components/simpleTable component/simpleTableEnums";
+import { Filter } from "./utils/Filter";
 
-const options = {
+const options: IOptions = {
   columns: [
     {
       label: "имя",
@@ -51,7 +51,6 @@ const options = {
       checked: "checked",
     },
   ],
-  sortable: {},
 };
 
 const simple = document.querySelector("#simple");
@@ -67,7 +66,7 @@ const preSortTable = new SortableTable(data, preSort, {
   ...{
     sortable: {
       key: "name",
-      value: "ASC",
+      value: SortableOptions.Asc,
     },
   },
 });
