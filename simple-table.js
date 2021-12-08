@@ -28,20 +28,15 @@ export class SimpleTable {
       return element.checked.indexOf("checked") === 0;
     });
     const grid = document.createElement("div");
-    const list = document.createElement("ul");
 
     let headerStr = this.renderHeader();
     let bodyStr = this.renderBody(data);
-    const inputs = this.renderInp(this.showedOptions);
 
     grid.classList.add("grid");
-    list.classList.add("options__list");
 
     grid.innerHTML = headerStr + bodyStr;
-    list.innerHTML = inputs;
 
     this.hostElement.innerHTML = "";
-    this.hostElement.append(list);
     this.hostElement.append(grid);
 
     let gridElements = this.hostElement.querySelectorAll("[data-dom='grid']");
@@ -54,10 +49,13 @@ export class SimpleTable {
     let template = this.options.columns.map((el) => {
       return renderToDom(el, this.headerTemplate);
     });
+    const inputs = this.renderInp(this.showedOptions);
 
     return `<div class="grid__header" data-dom="grid">
     <label class="grid__element_label">
-        <input type="checkbox" class="element_input">
+        <input type="checkbox" class="grid__element_input">
+
+    ${inputs}
     </label>
                     ${template.join("")}
                  </div>`;
@@ -82,7 +80,9 @@ export class SimpleTable {
     let template = data.map((el) => {
       return renderToDom(el, this.inpTemplate);
     });
-    return template.join("");
+    return `<ul class="options__list">
+    ${template.join("")}
+    </ul>`;
   }
 
   applyHandler() {

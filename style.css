@@ -10,6 +10,7 @@ body {
   grid-template-columns: 25px repeat(7, 1fr);
 }
 .grid {
+  position: relative;
   margin-bottom: 20px;
 }
 .grid__header {
@@ -40,8 +41,6 @@ body {
 .pagination {
   text-align: center;
 }
-.paginationBtn {
-}
 .pagination__button {
   width: 50px;
   height: 35px;
@@ -56,13 +55,20 @@ body {
 .pagination__button_active {
   background-color: grey;
 }
-.options__button ~ .options__list {
+.options__list {
   display: none;
 }
-.options__button_pushed ~ .options__list {
+.grid__element_input:checked ~ .options__list {
   display: block;
-}
-.options__list {
   list-style: none;
   text-align: left;
+  padding: 0;
+  position: absolute;
+  top: -25px;
+  color: black;
+  display: flex;
+  background: grey;
+  margin: 0;
+  width: 100%;
+  justify-content: space-evenly;
 }

@@ -52,8 +52,8 @@ export class SimpleTable {
     list.innerHTML = inputs;
 
     this.hostElement.innerHTML = "";
-    this.hostElement.append(list);
     this.hostElement.append(grid);
+    grid.append(list);
 
     let gridElements = this.hostElement.querySelectorAll(
       "[data-dom='grid']"
