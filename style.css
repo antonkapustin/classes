@@ -59,16 +59,15 @@ body {
   display: none;
 }
 .grid__element_input:checked ~ .options__list {
-  display: block;
+  display: flex;
+  justify-content: space-evenly;
   list-style: none;
   text-align: left;
   padding: 0;
+  margin: 0;
+  color: black;
+  background: grey;
+  width: 100%;
   position: absolute;
   top: -25px;
-  color: black;
-  display: flex;
-  background: grey;
-  margin: 0;
-  width: 100%;
-  justify-content: space-evenly;
 }

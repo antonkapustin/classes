@@ -20,42 +20,49 @@ export class SortableTable extends SimpleTable {
     this.hostElement.addEventListener("click", this.onSort.bind(this));
   }
 
-  onSort(event): void {
-    let current = event.target;
+  onSort(event: Event): void {
+    let current = event.target as HTMLButtonElement;
 
     while (current !== this.hostElement) {
       if (current.classList.contains("grid__element_button")) {
         break;
       }
-      current = current.parentElement;
+      if (current.parentElement) {
+        current = current.parentElement as HTMLButtonElement;
+      }
     }
     if (current === this.hostElement) {
       return;
     }
 
     let key = current.value;
-
-    if (key === this.options.sortable.key) {
-      if (this.options.sortable.value === SortableOptions.Asc) {
-        this.options.sortable.value = SortableOptions.Desc;
-      } else if (this.options.sortable.value === SortableOptions.Desc) {
-        this.options.sortable.value = null;
-      } else if (this.options.sortable.value === null) {
+    if (this.options.sortable) {
+      if (key === this.options.sortable.key) {
+        if (this.options.sortable.value === SortableOptions.Asc) {
+          this.options.sortable.value = SortableOptions.Desc;
+        } else if (this.options.sortable.value === SortableOptions.Desc) {
+          this.options.sortable.value = null;
+        } else if (this.options.sortable.value === null) {
+          this.options.sortable.value = SortableOptions.Asc;
+        }
+      } else {
+        this.options.sortable.key = key;
         this.options.sortable.value = SortableOptions.Asc;
       }
-    } else {
-      this.options.sortable.key = key;
-      this.options.sortable.value = SortableOptions.Asc;
     }
 
     this.sort();
     this.hostElement.removeEventListener("click", this.onSort);
     this.render();
   }
-  sort(): IData[] {
+  sort(): void {
+    if (this.options.sortable === undefined) {
+      return;
+    }
+    const key = this.options.sortable.key;
     let data = [...this.initialData].sort((a, b) => {
-      let valueA = a[this.options.sortable.key];
-      let valueB = b[this.options.sortable.key];
+      let valueA = a[key];
+      let valueB = b[key];
 
       if (valueA > valueB) {
         return 1;
@@ -66,13 +73,16 @@ export class SortableTable extends SimpleTable {
       }
     });
     if (this.options.sortable.value === SortableOptions.Asc) {
-      return (this.data = data);
+      this.data = data;
+      return;
     }
     if (this.options.sortable.value === SortableOptions.Desc) {
-      return (this.data = data.reverse());
+      this.data = data.reverse();
+      return;
     }
     if (this.options.sortable.value === null) {
-      return (this.data = [...this.initialData]);
+      this.data = [...this.initialData];
+      return;
     }
   }
 }

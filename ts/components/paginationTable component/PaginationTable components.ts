@@ -1,6 +1,7 @@
 import { SimpleTable } from "../simpleTable component/simpleTable";
 import { IData } from "../simpleTable component/simpleTableInterfaces";
 import { IOptions } from "../simpleTable component/simpleTableInterfaces";
+import { Page } from "./PaginationEnums";
 
 export class PaginationTable extends SimpleTable {
   currentPage: number;
@@ -20,26 +21,26 @@ export class PaginationTable extends SimpleTable {
     this.hostElement.addEventListener("click", this.onPagination.bind(this));
   }
 
-  onPagination(event): void {
-    let current = event.target;
+  onPagination(event: Event): void {
+    let current = event.target as HTMLButtonElement;
 
     while (current !== this.hostElement) {
       if (current.classList.contains("pagination__button")) {
         break;
       }
-      current = current.parentElement;
+      current = current.parentElement as HTMLButtonElement;
     }
     if (current === this.hostElement) {
       return;
     }
 
-    let key = current.value;
+    let key = +current.value;
 
     this.pagination([...this.data], this.rows, key);
     this.hostElement.removeEventListener("click", this.onPagination);
   }
 
-  renderBtn(n): string {
+  renderBtn(n: number): string {
     let btns = `<button class="pagination__button" value="1">1</button>`;
 
     let pages = Math.ceil(this.data.length / n);
@@ -55,8 +56,9 @@ export class PaginationTable extends SimpleTable {
                 <button class="pagination__button" type="button" value="next">Next</button>`;
   }
 
-  pagination(data, rows, page): void {
-    if (page === "prev") {
+  pagination(data: IData[], rows: number, page: Page | number): void {
+    // TODO: ReThink
+    if (page === Page.prev) {
       if (this.currentPage === 1) {
         let pushedBtn = this.hostElement.querySelector(
           `[value="${page}"]`
@@ -66,7 +68,7 @@ export class PaginationTable extends SimpleTable {
         this.currentPage--;
         this.pagination([...this.data], rows, this.currentPage);
       }
-    } else if (page === "next") {
+    } else if (page === Page.next) {
       this.currentPage++;
       this.pagination([...this.data], rows, this.currentPage);
     } else {
@@ -99,7 +101,9 @@ export class PaginationTable extends SimpleTable {
       let pushedBtn = this.hostElement.querySelector(
         `[value="${this.currentPage}"]`
       );
-
+      if (pushedBtn === null) {
+        return;
+      }
       pushedBtn.classList.add("pagination__button_active");
     }
   }

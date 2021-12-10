@@ -100,6 +100,7 @@ export class SimpleTable {
 
   onShowOptions(event) {
     let current = event.target;
+    console.log(event);
     while (current !== this.hostElement) {
       if (current.classList.contains("options__input")) {
         break;

@@ -1,10 +1,10 @@
-import { EventEmiter } from "../../eventEmiter";
+import { EventEmiter } from "./EventEmiter";
 
 export class Filter {
   hostElement: Element;
   emitter: EventEmiter;
 
-  constructor(hostElement) {
+  constructor(hostElement: Element) {
     this.hostElement = hostElement;
     this.emitter = new EventEmiter();
 
@@ -19,11 +19,15 @@ export class Filter {
   }
   applyHandlers(): void {
     let button = this.hostElement.querySelector(".filter__button");
+    if (button === null) {
+      return;
+    }
     button.addEventListener("click", this.onFilter.bind(this));
   }
   onFilter(): string {
-    let input: HTMLInputElement =
-      this.hostElement.querySelector(".filter__input");
+    let input = this.hostElement.querySelector(
+      ".filter__input"
+    ) as HTMLInputElement;
     this.emitter.emit("filter", input.value);
     return input.value;
   }

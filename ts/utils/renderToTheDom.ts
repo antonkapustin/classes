@@ -1,7 +1,14 @@
 export const renderToDom = (data: Object, template: string): string => {
   let matchMarkers = template.match(/{{\w.+?}}/gi);
+  if (matchMarkers === null) {
+    return "";
+  }
 
   let matchKeys = template.match(/(?<={{)\w.+?(?=}})/gi);
+
+  if (matchKeys === null) {
+    return "";
+  }
 
   let keys = matchKeys.map((element) => {
     element = element.replace("[", ".").replace("]", "");
@@ -12,7 +19,7 @@ export const renderToDom = (data: Object, template: string): string => {
   let result = template;
 
   matchMarkers.forEach((element, i) => {
-    let value = keys[i].reduce((sum, curr) => {
+    let value = keys[i].reduce((sum: any, curr) => {
       return sum[curr];
     }, data);
 

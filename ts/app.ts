@@ -1,4 +1,4 @@
-import { data } from "../data";
+import { data } from "./data";
 import { SimpleTable } from "./components/simpleTable component/simpleTable";
 import { SortableTable } from "./components/sortableTable component/sortableTable";
 import { PaginationTable } from "./components/paginationTable component/PaginationTable components";
@@ -53,13 +53,13 @@ const options: IOptions = {
   ],
 };
 
-const simple = document.querySelector("#simple");
+const simple = document.querySelector("#simple") as Element;
 const simpleTable = new SimpleTable(data, simple, options);
 
-const sort = document.querySelector("#sort");
+const sort = document.querySelector("#sort") as Element;
 const sortTable = new SortableTable(data, sort, options);
 
-const preSort = document.querySelector("#pre-sort");
+const preSort = document.querySelector("#pre-sort") as Element;
 
 const preSortTable = new SortableTable(data, preSort, {
   ...options,
@@ -71,13 +71,13 @@ const preSortTable = new SortableTable(data, preSort, {
   },
 });
 
-const pagination = document.querySelector("#pagination");
+const pagination = document.querySelector("#pagination") as Element;
 const paginationTable = new PaginationTable(data, pagination, options);
 
-const filter = document.querySelector("#simple-filter");
+const filter = document.querySelector("#simple-filter") as Element;
 const filterClass = new Filter(filter);
 
-const pagination2 = document.querySelector("#pagination_filter");
+const pagination2 = document.querySelector("#pagination_filter") as Element;
 const paginationFilter = new PaginationTable(data, pagination2, options);
 
 filterClass.emitter.subscribe("filter", (filter) => {
