@@ -17,7 +17,6 @@ export class SortableTable extends SimpleTable {
     super.render();
   }
   applyHandler(): void {
-    super.applyHandler();
     this.hostElement.addEventListener("click", this.onSort.bind(this));
   }
 

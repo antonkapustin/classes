@@ -13,7 +13,7 @@ export class PaginationTable extends SimpleTable {
   render() {
     super.render();
     const paginationDiv = document.createElement("div");
-    let paginationBtn = this.renderBtn(this.rows);
+    let paginationBtn = this.renderBtn();
     paginationDiv.classList.add("paginationBtn");
     paginationDiv.innerHTML = paginationBtn;
     this.hostElement.append(paginationDiv);
@@ -24,6 +24,17 @@ export class PaginationTable extends SimpleTable {
       return;
     }
     pushedBtn.classList.add("pagination__button_active");
+    let maxPage = Math.ceil(this.initialeData.length / this.rows);
+    if (this.currentPage === 1) {
+      let button = this.hostElement.querySelector("[value='prev']");
+      if (button === null) {
+        return;
+      }
+      button.disabled = true;
+    } else if (this.currentPage === maxPage) {
+      let button = this.hostElement.querySelector("[value='next']");
+      button.disabled = true;
+    }
   }
   applyHandler() {
     this.hostElement.addEventListener("click", this.onPagination.bind(this));
@@ -49,9 +60,9 @@ export class PaginationTable extends SimpleTable {
     this.hostElement.removeEventListener("click", this.onPagination);
     this.render();
   }
-  renderBtn(n) {
+  renderBtn() {
     let btns = `<button class="pagination__button" value="1">1</button>`;
-    let pages = Math.ceil(this.initialeData.length / n);
+    let pages = Math.ceil(this.initialeData.length / this.rows);
     for (let i = 2; i <= pages; i++) {
       btns =
         btns +
