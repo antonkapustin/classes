@@ -17,6 +17,7 @@ export class SortableTable extends SimpleTable {
     super.render();
   }
   applyHandler(): void {
+    super.applyHandler();
     this.hostElement.addEventListener("click", this.onSort.bind(this));
   }
 
@@ -36,7 +37,9 @@ export class SortableTable extends SimpleTable {
     }
 
     let key = current.value;
-    if (this.options.sortable) {
+    if (this.options.sortable === undefined) {
+      this.options.sortable = { key: key, value: SortableOptions.Asc };
+    } else {
       if (key === this.options.sortable.key) {
         if (this.options.sortable.value === SortableOptions.Asc) {
           this.options.sortable.value = SortableOptions.Desc;

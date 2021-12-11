@@ -6,15 +6,36 @@ import { Page } from "./PaginationEnums";
 export class PaginationTable extends SimpleTable {
   currentPage: number;
   rows: number;
+  data: IData[];
 
   constructor(data: IData[], hostElement: Element, options: IOptions) {
     super(data, hostElement, options);
     this.currentPage = 1;
     this.rows = 10;
+    this.data = this.pagination(
+      [...this.initialeData],
+      this.rows,
+      this.currentPage
+    );
   }
 
   render(): void {
-    this.pagination([...this.data], this.rows, this.currentPage);
+    super.render();
+
+    const paginationDiv = document.createElement("div");
+    let paginationBtn = this.renderBtn(this.rows);
+
+    paginationDiv.classList.add("paginationBtn");
+    paginationDiv.innerHTML = paginationBtn;
+    this.hostElement.append(paginationDiv);
+
+    let pushedBtn = this.hostElement.querySelector(
+      `[value="${this.currentPage}"]`
+    );
+    if (pushedBtn === null) {
+      return;
+    }
+    pushedBtn.classList.add("pagination__button_active");
   }
 
   applyHandler(): void {
@@ -35,15 +56,21 @@ export class PaginationTable extends SimpleTable {
     }
 
     let key = +current.value;
+    if (current.value === "prev") {
+      key = this.currentPage - 1;
+    } else if (current.value === "next") {
+      key = this.currentPage + 1;
+    }
 
-    this.pagination([...this.data], this.rows, key);
+    this.data = this.pagination([...this.initialeData], this.rows, key);
     this.hostElement.removeEventListener("click", this.onPagination);
+    this.render();
   }
 
   renderBtn(n: number): string {
     let btns = `<button class="pagination__button" value="1">1</button>`;
 
-    let pages = Math.ceil(this.data.length / n);
+    let pages = Math.ceil(this.initialeData.length / n);
 
     for (let i = 2; i <= pages; i++) {
       btns =
@@ -56,55 +83,13 @@ export class PaginationTable extends SimpleTable {
                 <button class="pagination__button" type="button" value="next">Next</button>`;
   }
 
-  pagination(data: IData[], rows: number, page: Page | number): void {
+  pagination(data: IData[], rows: number, page: number): IData[] {
     // TODO: ReThink
-    if (page === Page.prev) {
-      if (this.currentPage === 1) {
-        let pushedBtn = this.hostElement.querySelector(
-          `[value="${page}"]`
-        ) as HTMLInputElement;
-        pushedBtn.disabled = true;
-      } else {
-        this.currentPage--;
-        this.pagination([...this.data], rows, this.currentPage);
-      }
-    } else if (page === Page.next) {
-      this.currentPage++;
-      this.pagination([...this.data], rows, this.currentPage);
-    } else {
-      this.currentPage = page;
-      page--;
-
-      let start = rows * page;
-      let end = start + rows;
-      let showItem = data.slice(start, end);
-
-      const grid = document.createElement("div");
-
-      let headerStr = this.renderHeader();
-      let bodyStr = this.renderBody(showItem);
-
-      grid.classList.add("grid");
-
-      grid.innerHTML = headerStr + bodyStr;
-
-      this.hostElement.innerHTML = "";
-      this.hostElement.append(grid);
-
-      const paginationDiv = document.createElement("div");
-      let paginationBtn = this.renderBtn(rows);
-
-      paginationDiv.classList.add("paginationBtn");
-      paginationDiv.innerHTML = paginationBtn;
-      this.hostElement.append(paginationDiv);
-
-      let pushedBtn = this.hostElement.querySelector(
-        `[value="${this.currentPage}"]`
-      );
-      if (pushedBtn === null) {
-        return;
-      }
-      pushedBtn.classList.add("pagination__button_active");
-    }
+    this.currentPage = page;
+    page--;
+    let start = rows * page;
+    let end = start + rows;
+    let showItem = data.slice(start, end);
+    return showItem;
   }
 }

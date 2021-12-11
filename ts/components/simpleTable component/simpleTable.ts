@@ -79,6 +79,8 @@ export class SimpleTable {
       })
       .join("");
 
+    template = `<p class="grid__element"></p>` + template;
+
     let array = this.data.map((el) => {
       return renderToDom(el, template);
     });
